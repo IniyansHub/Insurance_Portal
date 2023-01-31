@@ -1,7 +1,8 @@
+using Insurance_Portal.Domain.Entities;
 namespace Insurance_Portal.Application.Interfaces;
-
 public interface IAuthRepository
 {
-  dynamic Getuser(string emailId);
-  void AddUser(dynamic entity);
+  public Task<AuthDetail> FindUser(string email);
+  public void AddUser(AuthDetail authDetail);
+
 }

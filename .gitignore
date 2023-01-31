@@ -404,5 +404,5 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
-#API Request
-Requests
+#Debug
+.vscode
