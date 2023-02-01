@@ -3,31 +3,23 @@ using Insurance_portal.Application.Services;
 using Insurance_Portal.Application.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Insurance_Portal.Application.Services;
 
 namespace Insurance_portal.Application;
 public static class ConfigureServices
 {
   public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration config)
   {
-    var CognitoDetails  = config.GetSection("CognitoDetails").GetChildren().ToDictionary(x => x.Key, x => x.Value);
+    var CognitoDetails = HelperService.getCognitoDetails(config);
     services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
       options.Audience = CognitoDetails["ClientId"];
       options.Authority = CognitoDetails["Authority"];
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            RoleClaimType = "cognito:group"
-        };
-    });
-
-    services.AddAuthorization(options =>
-    {
-        options.AddPolicy("Admin", policy =>
-    policy.RequireAssertion(context =>
-    context.User.HasClaim(c => c.Type == "cognito:groups" && c.Value.Contains("Admin"))));
+      options.TokenValidationParameters = new TokenValidationParameters()
+      {
+        RoleClaimType = "cognito:groups"
+      };
     });
 
     services.AddScoped<IAuthService, AuthService>();

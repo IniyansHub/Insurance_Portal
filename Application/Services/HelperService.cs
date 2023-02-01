@@ -11,7 +11,4 @@ public static class HelperService
     return config.GetSection("CognitoDetails").GetChildren().ToDictionary(x => x.Key, x => x.Value);
   }
 
-
-
-
 }
