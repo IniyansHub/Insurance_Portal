@@ -14,5 +14,5 @@ public partial class Policy
 
   public string? PolicyDescription { get; set; }
 
-  public virtual ICollection<UserPolicy> UserPolicies { get; } = new List<UserPolicy>();
+  public virtual ICollection<UserPolicy>? UserPolicies { get; } = new List<UserPolicy>();
 }
