@@ -31,7 +31,7 @@ public class PolicyController : Controller
     return Ok(response);
   }
 
-  [Authorize(Policy = "Admin")]
+  [Authorize(Roles = "Admin")]
   [HttpPost("create")]
   public async Task<ActionResult> CreatePolicy(Policy policy)
   {
@@ -39,7 +39,7 @@ public class PolicyController : Controller
     return Ok(response);
   }
 
-  [Authorize(Policy = "Admin")]
+  [Authorize(Roles = "Admin")]
   [HttpDelete("delete/{policyId}")]
   public async Task<ActionResult> DeletePolicy(int policyId)
   {
@@ -47,7 +47,7 @@ public class PolicyController : Controller
     return Ok(response);
   }
 
-  [Authorize(Policy = "Admin")]
+  [Authorize(Roles = "Admin")]
   [HttpPut("update/{id}")]
   public async Task<ActionResult> UpdatePolicy(Policy updatedPolicy, int id)
   {
